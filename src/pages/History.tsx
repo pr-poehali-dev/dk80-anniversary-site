@@ -1,5 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Icon from "@/components/ui/icon";
+import PhotoGallery from "@/components/PhotoGallery";
+import { useState } from "react";
 
 const History = () => {
   const timeline = [
@@ -35,6 +37,42 @@ const History = () => {
       icon: "Crown",
     },
   ];
+
+  const [photos, setPhotos] = useState([
+    {
+      id: "1",
+      src: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800",
+      title: "Открытие Дворца культуры",
+      year: "1944",
+      description: "Торжественное открытие Дворца культуры в 1944 году",
+    },
+    {
+      id: "2",
+      src: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800",
+      title: "Первый концерт",
+      year: "1945",
+      description: "Первое масштабное выступление в новом зале",
+    },
+    {
+      id: "3",
+      src: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800",
+      title: "Реконструкция залов",
+      year: "1985",
+      description: "Масштабная модернизация концертных залов",
+    },
+  ]);
+
+  const handleAddPhoto = (newPhoto: Omit<(typeof photos)[0], "id">) => {
+    const photo = {
+      ...newPhoto,
+      id: Date.now().toString(),
+    };
+    setPhotos([...photos, photo]);
+  };
+
+  const handleDeletePhoto = (id: string) => {
+    setPhotos(photos.filter((photo) => photo.id !== id));
+  };
 
   return (
     <div className="min-h-screen bg-jubilee-cream">
@@ -98,7 +136,7 @@ const History = () => {
         </div>
       </section>
 
-      {/* Photo Gallery Preview */}
+      {/* Photo Gallery */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -110,21 +148,12 @@ const History = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((_, index) => (
-              <div
-                key={index}
-                className="relative bg-gray-200 rounded-lg overflow-hidden aspect-video group cursor-pointer"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                  <Icon name="Image" className="w-12 h-12 text-gray-400" />
-                </div>
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                  <Icon name="ZoomIn" className="w-8 h-8 text-white" />
-                </div>
-              </div>
-            ))}
-          </div>
+          <PhotoGallery
+            photos={photos}
+            onAddPhoto={handleAddPhoto}
+            onDeletePhoto={handleDeletePhoto}
+            editable={true}
+          />
         </div>
       </section>
     </div>
