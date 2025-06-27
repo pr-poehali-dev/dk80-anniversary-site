@@ -25,20 +25,20 @@ const config: Config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#D4AF37",
+          DEFAULT: "#24446c",
           foreground: "#FFFFFF",
-          dark: "#B8941F",
+          dark: "#1a3352",
         },
         secondary: {
-          DEFAULT: "#1A365D",
+          DEFAULT: "#24446c",
           foreground: "#FFFFFF",
-          light: "#2D5A87",
+          light: "#3d5a7a",
         },
         jubilee: {
-          gold: "#D4AF37",
-          navy: "#1A365D",
+          gold: "#24446c",
+          navy: "#24446c",
           cream: "#F7FAFC",
-          bronze: "#CD7F32",
+          bronze: "#3d5a7a",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
